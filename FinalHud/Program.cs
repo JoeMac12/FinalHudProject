@@ -9,98 +9,90 @@ namespace FinalHud
 {
     internal class Program
     {
+        private static int Health = 100;
+        private static int Shield = 50;
+        private static int Lives = 1;
+        private static float ScoreMultiplier = 0f;
+
         static void Main(string[] args)
         {
-
             Console.WriteLine("WELCOME TO CAVE ESCAPE");
             Console.WriteLine("----------------------");
 
-            int Health;
-            int Shield;
-            int Lives;
+            ShowHUD();
 
-            float ScoreMultiplier;
+            Console.WriteLine("------------");
+            Console.WriteLine("START GAME");
+            Console.WriteLine("");
 
-            Health = 100;
-            Shield = 50;
-            Lives = 1;
-            ScoreMultiplier = 0f;
+            Console.WriteLine("You Awaken in a dark cave, cold and damp. Torch in hand, you begin your perilous journey back to the surface.");
 
+            Console.WriteLine("As you enter a new part of the cave, you come across a goblin with an old rusty sword");
+            Console.WriteLine("");
+            Console.WriteLine("It Attacks You!");
 
-            Console.WriteLine("Player Stats");
+            TakeDamage(30);
+
+            Console.WriteLine("------------");
+            Console.WriteLine("");
+            Console.WriteLine("You do a counter-attack and kill the goblin!");
+            Console.WriteLine("");
             Console.WriteLine("------------");
 
+            AddScore(15, 0.5f);
 
+            Console.WriteLine("------------");
+            Console.WriteLine("");
+            Console.WriteLine("You come across an underwater waterfall inside the cave. You see a Giant bat emerge from behind the waterfall!");
+            Console.WriteLine("It spits mutated acid at you!");
+            Console.WriteLine("");
+            Console.WriteLine("------------");
+
+            TakeDamage(50, 20);
+
+            Console.WriteLine("------------");
+            Console.WriteLine("");
+            Console.WriteLine("The bat flies away before you can attack it!");
+            Console.WriteLine("");
+            Console.WriteLine("After a long journey to the surface, you begin to see the light from the sun on the cold cave rocks.");
+            Console.WriteLine("Just before you reach the exit, a huge troll blocks your path. It roars and swings its massive club right on top of you, ending your journey!");
+            Console.WriteLine("");
+            Console.WriteLine("------------");
+
+            TakeDamage(100, 50, 1);
+
+            Console.WriteLine("------------");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("GAME OVER");
+            Console.ResetColor();
+
+            Console.ReadKey(true);
+        }
+
+        private static void ShowHUD()
+        {
+            Console.WriteLine("Player Stats");
+            Console.WriteLine("------------");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("HP" + ":" + Health);
             Console.WriteLine("Shield" + ":" + Shield);
             Console.WriteLine("Lives" + ":" + Lives);
             Console.WriteLine("Score" + ":" + ScoreMultiplier);
             Console.ResetColor();
+        }
 
-            Console.WriteLine("------------");
-            Console.WriteLine("START GAME");
-            Console.WriteLine("");
+        private static void TakeDamage(int healthDamage, int shieldDamage = 0, int livesDecrease = 0)
+        {
+            Health -= healthDamage;
+            Shield -= shieldDamage;
+            Lives -= livesDecrease;
+            ShowHUD();
+        }
 
-            Console.WriteLine("You Awaken in a dark cave, cold and damp. Torch in hand, you begen your perilous journey back to the surface.");
-
-            Console.WriteLine("As you enter a new part of the cave, you come across a goblin with an old rusty sword");
-            Console.WriteLine("");
-            Console.WriteLine("- It Attacks You!");
-
-            Console.WriteLine("You take 30 direct damage");
-            Console.WriteLine("");
-            Console.WriteLine("------------");
-            
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("HP" + ":" + (Health - 30));
-            
-            Console.ResetColor();
-            Console.WriteLine("------------");
-            Console.WriteLine("");
-            Console.WriteLine("- You do a counter attack and kill the goblin!");
-            Console.WriteLine("");
-            Console.WriteLine("------------");
-            
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Score" + ":" + (ScoreMultiplier + 15.5));
-            Console.ResetColor();
-            
-            Console.WriteLine("------------");
-            Console.WriteLine("");
-            Console.WriteLine("You come across an underwater waterfall inside the cave. You see a Giant back emerge from behind the waterfall!");
-            Console.WriteLine("It spits mutated acid at you!");
-            Console.WriteLine("");
-            Console.WriteLine("------------");
-           
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("HP" + ":" + (Health - 50));
-            Console.WriteLine("Shield" + ":" + (Shield - 20));
-            Console.ResetColor();
-            
-            Console.WriteLine("------------");
-            Console.WriteLine("");
-            Console.WriteLine("The bat flys away before you can attack it!");
-            Console.WriteLine("");
-            Console.WriteLine("After a long journey to the surface, you begin to see the light from the sun on the cold cave rocks.");
-            Console.WriteLine("Just before you reach the exit, a huge troll blocks your path. It roars and swings it's massive club right on top of you, ending your journey!");
-            Console.WriteLine("");
-            Console.WriteLine("------------");
-            
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("HP" + ":" + (Health - 100));
-            Console.WriteLine("Shield" + ":" + (Shield - 50));
-            Console.WriteLine("Lives" + ":" + (Lives - 1));
-            Console.ResetColor();
-           
-            Console.WriteLine("------------");
-
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("GAME OVER");
-            Console.ResetColor();
-
-
-            Console.ReadKey(true);
+        private static void AddScore(int pointsEarned, float scoreMultiplier)
+        {
+            ScoreMultiplier += pointsEarned * scoreMultiplier;
+            ShowHUD();
         }
     }
 }
