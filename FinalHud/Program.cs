@@ -59,7 +59,7 @@ namespace FinalHud
             Console.WriteLine("");
             Console.WriteLine("------------");
 
-            TakeDamage(100, 50, 1);
+            TakeDamage(20, 30, 1);
 
             Console.WriteLine("------------");
             Console.ForegroundColor = ConsoleColor.Red;
