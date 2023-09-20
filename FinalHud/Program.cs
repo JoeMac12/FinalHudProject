@@ -81,11 +81,11 @@ namespace FinalHud
             Console.ResetColor();
         }
 
-        private static void TakeDamage(int healthDamage, int shieldDamage = 0, int livesDecrease = 0)
+        private static void TakeDamage(int healthDamage, int shieldDamage = 0, int livesLeft = 0)
         {
             Health -= healthDamage;
             Shield -= shieldDamage;
-            Lives -= livesDecrease;
+            Lives -= livesLeft;
             ShowHUD();
         }
 
